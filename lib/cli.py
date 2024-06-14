@@ -1,4 +1,4 @@
-from helpers import exit_program, check_id, display_score, generate_event, save_game, load_game, delete_save, list_saves_by_id
+from helpers import exit_program, check_id, display_score, generate_event, save_game, load_game, delete_save, list_saves
 from models.patron import Patron
 from models.event import Event
 from models.game_state import GameState
@@ -30,7 +30,9 @@ def main():
         elif choice == "4":
             delete_save()
         elif choice == "5":
-            list_saves_by_id()
+            list_saves()
+        elif choice == "6":
+            print("How to play: Enter y or n for each patron to allow entry. If you allow too long, you will lose a point.")
         else:
             print("Invalid choice")
 
@@ -42,6 +44,7 @@ def menu():
     print("3. Load game")
     print("4. Delete saved game")
     print("5. List saved games")
+    print("6. Instructions")
 
 def simulate_shift(shift, event):
     current_year = datetime.datetime.now().year
@@ -54,7 +57,7 @@ def simulate_shift(shift, event):
         action = input("Allow entry (y/n)? ")
         decision_time = time.time() - start_time
         
-        if decision_time > 5: 
+        if decision_time > 5:
             print("Too slow! You lost a point.")
             shift_score -= 1
             continue

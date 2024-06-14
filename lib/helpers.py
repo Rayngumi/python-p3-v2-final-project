@@ -27,7 +27,7 @@ def generate_event(shift):
     session.commit()
     return event
 
-def save_game(score, shift, name="game_save.db"):
+def save_game(score, shift):
     game_state = GameState(score=score, shift=shift)
     session.add(game_state)
     session.commit()
@@ -53,7 +53,7 @@ def delete_save():
     else:
         print("No saved game found with that ID.")
 
-def list_saves_by_id():
+def list_saves():
     saves = session.query(GameState).all()
     if saves:
         print("\nSaved Games:")
